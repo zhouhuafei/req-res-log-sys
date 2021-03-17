@@ -1,5 +1,5 @@
 {
-  "name": "res-req-log-sys",
+  "name": "req-res-log-sys",
   "version": "1.0.0",
   "description": "用以记录请求和响应的日志系统-主要用来记录请求错误和响应错误",
   "main": "index.js",
@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhouhuafei/res-req-log-sys.git"
+    "url": "git+https://github.com/zhouhuafei/req-res-log-sys.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zhouhuafei/res-req-log-sys/issues"
+    "url": "https://github.com/zhouhuafei/req-res-log-sys/issues"
   },
-  "homepage": "https://github.com/zhouhuafei/res-req-log-sys#readme"
+  "homepage": "https://github.com/zhouhuafei/req-res-log-sys#readme"
 }

@@ -13,6 +13,8 @@ module.exports = {
     ecmaVersion: 12
   },
   rules: {
+    'prefer-const': 'off',
+    'no-unused-vars': 'off',
     quotes: 'off'
   }
 }

@@ -13,7 +13,7 @@ describe('test/app/controller/home.test.js', () => {
 
   it('should GET /', () => {
     return app.httpRequest()
-      .get('/res-req-log-sys/api/')
+      .get('/req-res-log-sys/api/')
       .expect(JSON.stringify({ hello: 'world' }))
       .expect(200)
   })

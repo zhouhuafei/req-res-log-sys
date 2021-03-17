@@ -14,6 +14,20 @@ module.exports = appInfo => {
    **/
   const config = exports = {}
 
+  config.mongoose = {
+    url: process.env.EGG_MONGODB_URL || 'mongodb://127.0.0.1/req-res-log-sys',
+    options: {
+      server: {
+        poolSize: 40
+      }
+    }
+  }
+  config.security = {
+    csrf: {
+      enable: false
+    }
+  }
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1615900930333_9905'
 

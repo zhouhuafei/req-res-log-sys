@@ -5,12 +5,15 @@ const Controller = require('egg').Controller
 class HomeController extends Controller {
   async get () {
     const { ctx } = this
-    ctx.body = { hello: 'world get' }
+    const dataList = await ctx.model.Log.find()
+    ctx.body = { dataList }
   }
 
   async post () {
     const { ctx } = this
-    ctx.body = { hello: 'world post' }
+    await ctx.model.Log.create(ctx.request.body)
+    ctx.status = 204
+    ctx.body = {}
   }
 }
 
