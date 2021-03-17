@@ -25,7 +25,12 @@ module.exports = appInfo => {
   config.security = {
     csrf: {
       enable: false
-    }
+    },
+    domainWhiteList: ['*']
+  }
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   }
 
   // use for cookie sign key, should change to your own and keep security

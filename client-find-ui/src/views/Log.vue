@@ -1,0 +1,62 @@
+<template>
+  <div>
+    <el-card>
+      <div slot="header" class="flex-space-between">
+        <span>日志列表</span>
+        <el-button type="primary" @click="create">写入日志</el-button>
+      </div>
+      <el-table :data="tableData">
+        <el-table-column align="center" prop="req" label="req请求数据"></el-table-column>
+        <el-table-column align="center" prop="res" label="res响应数据"></el-table-column>
+        <el-table-column align="center" prop="ext" label="ext其他数据"></el-table-column>
+      </el-table>
+      <div class="block" style="padding-top: 10px;text-align: right;">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400">
+        </el-pagination>
+      </div>
+    </el-card>
+  </div>
+</template>
+<script>
+import ApiLog from '@/api/log'
+
+export default {
+  data () {
+    return {
+      // 待续....
+      // page 当前是第几页
+      // limit 每页数据条数
+      // count 数据总条数
+      // pageCount 总共多少页
+      search: {
+        pageSize: '',
+        pageNum: ''
+      },
+      currentPage4: 4,
+      tableData: []
+    }
+  },
+  async created () {
+    const result = await ApiLog.getList()
+    this.tableData = result.dataList
+  },
+  methods: {
+    create () {
+      ApiLog.postList({ req: 'req', res: 'res', ext: 'ext' })
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+    }
+  }
+}
+</script>

@@ -6,7 +6,7 @@ class HomeController extends Controller {
   async get () {
     const { ctx } = this
     const dataList = await ctx.model.Log.find()
-    ctx.body = { dataList }
+    ctx.body = { result: { dataList } }
   }
 
   async post () {
