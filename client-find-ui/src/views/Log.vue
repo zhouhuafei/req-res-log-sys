@@ -49,7 +49,11 @@ export default {
   },
   methods: {
     create () {
-      ApiLog.postList({ req: 'req', res: 'res', ext: 'ext' })
+      ApiLog.postList({
+        req: { reqKey: 'reqVal' },
+        res: { resKey: 'resVal' },
+        ext: { extKey: 'extVal' }
+      })
     },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`)
