@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    container_name: nginx
+    container_name: nginx_req-res-log-sys
     image: nginx:latest
     restart: always
     ports:
@@ -10,9 +10,9 @@ services:
       - 443:443
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ../../:/usr/share/nginx/html/www # bind mount 会清空容器内的文件，挂载宿主机的文件。
+      - ./client-find-ui/dist:/usr/share/nginx/html/www # bind mount 会清空容器内的文件，挂载宿主机的文件。
   mongo:
-    container_name: mongo
+    container_name: mongo_req-res-log-sys
     image: mongo:latest
     restart: always
     volumes:
