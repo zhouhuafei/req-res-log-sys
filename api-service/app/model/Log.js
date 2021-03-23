@@ -4,17 +4,17 @@ const thisFileName = path.parse(__filename).name
 
 const definition = {
   req: {
-    type: String,
+    type: Object,
     default: '',
     trim: true
   },
   res: {
-    type: String,
+    type: Object,
     default: '',
     trim: true
   },
   ext: {
-    type: String,
+    type: Object,
     default: '',
     trim: true
   }
@@ -22,7 +22,7 @@ const definition = {
 const options = {
   timestamps: {
     createdAt: 'createdAt',
-    updateAt: 'updateAt'
+    updatedAt: 'updatedAt'
   },
   collection: thisFileName
 }

@@ -6,9 +6,19 @@
         <el-button type="primary" @click="create">写入日志</el-button>
       </div>
       <el-table :data="tableData">
-        <el-table-column align="center" prop="req" label="req请求数据"></el-table-column>
-        <el-table-column align="center" prop="res" label="res响应数据"></el-table-column>
-        <el-table-column align="center" prop="ext" label="ext其他数据"></el-table-column>
+        <el-table-column align="center" label="_id" prop="_id"></el-table-column>
+        <el-table-column align="center" label="req请求数据" v-slot="scope">
+          {{scope.row.req}}
+        </el-table-column>
+        <el-table-column align="center" label="res响应数据" v-slot="scope">
+          {{scope.row.res}}
+        </el-table-column>
+        <el-table-column align="center" label="ext其他数据" v-slot="scope">
+          {{scope.row.ext}}
+        </el-table-column>
+        <el-table-column align="center" label="创建时间" v-slot="scope">
+          {{new Date(scope.row.createdAt).toLocaleString()}}
+        </el-table-column>
       </el-table>
       <div class="block" style="padding-top: 10px;text-align: right;">
         <el-pagination
