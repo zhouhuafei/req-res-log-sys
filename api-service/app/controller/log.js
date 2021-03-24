@@ -4,8 +4,8 @@ const Controller = require('egg').Controller
 
 class HomeController extends Controller {
   async get () {
-    const { ctx } = this
-    const dataList = await ctx.model.Log.find().sort({ _id: -1 })
+    const { ctx, service } = this
+    const dataList = await service.log.find()
     ctx.body = { result: { dataList } }
   }
 
