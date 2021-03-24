@@ -60,9 +60,9 @@ export default {
   methods: {
     create () {
       ApiLog.postList({
-        req: { reqKey: 'reqVal' },
-        res: { resKey: 'resVal' },
-        ext: { extKey: 'extVal' }
+        req: { value: Math.random() },
+        res: { value: Math.random() },
+        ext: { value: Math.random() }
       })
     },
     handleSizeChange (val) {
