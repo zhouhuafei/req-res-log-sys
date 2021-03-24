@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <router-link :to="{name: 'Log'}"><h1>Go to the log page.</h1></router-link>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
