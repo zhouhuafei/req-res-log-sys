@@ -5,6 +5,24 @@
         <span>日志列表</span>
         <el-button type="primary" @click="create">写入日志</el-button>
       </div>
+      <div class="ui-search-header-block dark">
+        <el-form inline>
+          <el-form-item label="req请求数据">
+            <el-input v-model="search.req"></el-input>
+          </el-form-item>
+          <el-form-item label="res响应数据">
+            <el-input v-model="search.res"></el-input>
+          </el-form-item>
+          <el-form-item label="ext其他数据">
+            <el-input v-model="search.ext"></el-input>
+          </el-form-item>
+        </el-form>
+        <el-button
+          class="btn-search" type="primary" icon="el-icon-search"
+          @click="handleCurrentChange(1)"
+        >搜索
+        </el-button>
+      </div>
       <el-table :data="tableData">
         <el-table-column align="center" label="_id" prop="_id"></el-table-column>
         <el-table-column align="center" label="req请求数据" v-slot="scope">
@@ -24,11 +42,11 @@
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page="currentPage4"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
+          :current-page="search.page"
+          :page-sizes="[10, 100, 200, 300, 400]"
+          :page-size="search.limit"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="search.count">
         </el-pagination>
       </div>
     </el-card>
@@ -40,22 +58,24 @@ import ApiLog from '@/api/log'
 export default {
   data () {
     return {
-      // 待续....
       // page 当前是第几页
       // limit 每页数据条数
       // count 数据总条数
       // pageCount 总共多少页
       search: {
-        pageSize: '',
-        pageNum: ''
+        req: '',
+        res: '',
+        ext: '',
+        page: 1,
+        limit: 10,
+        count: 300,
+        pageCount: 30
       },
-      currentPage4: 4,
       tableData: []
     }
   },
   async created () {
-    const result = await ApiLog.getList()
-    this.tableData = result.dataList
+    this.getList()
   },
   methods: {
     create () {
@@ -65,11 +85,18 @@ export default {
         ext: { value: Math.random() }
       })
     },
+    async getList () {
+      const result = await ApiLog.getList({ ...this.search })
+      this.tableData = result.list
+      this.search.count = result.count
+    },
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      this.search.limit = val
+      this.getList()
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      this.search.page = val
+      this.getList()
     }
   }
 }
