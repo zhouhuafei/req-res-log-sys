@@ -15,6 +15,10 @@ function request (options = {}) {
     url: window.API_URL + options.url
   }).then((res) => {
     return res.data.result
+  }).catch((Error) => {
+    console.log('打印Error：↓\n', Error)
+    console.log('打印Error.message：↓\n', Error.message)
+    return Promise.reject(Error)
   })
 }
 
