@@ -23,14 +23,16 @@ class LogService extends Service {
     // 与-默认
     filter = {
       // 效率低下 - 慎用 - 此案例可以通过存成字符串配合正则$regex实现
-      $where: function () {
-        // 待续.... 得不到入参
-        const reqFilter = String(this.req.value).match(new RegExp("55"))
-        // const resFilter = String(this.req.value).match(new RegExp(query.res))
-        // const extFilter = String(this.req.value).match(new RegExp(query.ext))
-        // return reqFilter && resFilter && extFilter
-        return reqFilter
+      /*
+      $where: function () { // 注意：函数方式拿不到外部变量
+        return String(this.req.value).match(new RegExp('55'))
       }
+      */
+      $where: `
+        String(this.req.value).match(new RegExp(${query.req}))&&
+        String(this.res.value).match(new RegExp(${query.res}))&&
+        String(this.ext.value).match(new RegExp(${query.ext}))
+      `
     }
     const count = await this.ctx.model.Log.count(filter)
     const list = await this.ctx.model.Log
