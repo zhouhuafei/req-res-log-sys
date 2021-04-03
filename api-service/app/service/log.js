@@ -20,7 +20,7 @@ class LogService extends Service {
       'res.value': { $gte: 0.6 },
       'ext.value': { $gte: 0.6 }
     }
-    // 与-默认
+    // 与-$where
     filter = {
       // 效率低下 - 慎用 - 此案例可以通过存成字符串配合正则$regex实现
       /*
