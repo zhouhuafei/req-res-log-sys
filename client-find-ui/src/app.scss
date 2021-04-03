@@ -26,3 +26,27 @@
     margin-bottom: 10px;
   }
 }
+
+.tree-view-item {
+  .tree-view-item-key {
+    color: #262626;
+  }
+
+  .tree-view-item-value {
+    &.tree-view-item-value-string {
+      color: #c82623;
+    }
+
+    &.tree-view-item-value-number {
+      color: #3f28d7;
+    }
+
+    &.tree-view-item-value-boolean {
+      color: #bf46aa;
+    }
+
+    &.tree-view-item-value-null {
+      color: #bf46aa;
+    }
+  }
+}

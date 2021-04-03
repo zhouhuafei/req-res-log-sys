@@ -63,7 +63,7 @@
       title="查看"
       :visible.sync="showLookDialog"
       width="50%">
-      <tree-view :data="lookDialogData" :options="{maxDepth: 3}"></tree-view>
+      <tree-view :data="lookDialogData"></tree-view>
     </el-dialog>
   </div>
 </template>
