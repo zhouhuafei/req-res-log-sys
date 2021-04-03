@@ -26,13 +26,22 @@
       <el-table :data="tableData">
         <el-table-column align="center" label="_id" prop="_id"></el-table-column>
         <el-table-column align="center" label="req请求数据" v-slot="scope">
-          {{scope.row.req}}
+          <div @click="showLook(scope.row.req)">
+            <span>{{scope.row.req}}</span>
+            <el-button type="text">查看</el-button>
+          </div>
         </el-table-column>
-        <el-table-column align="center" label="res响应数据" v-slot="scope">
-          {{scope.row.res}}
+        <el-table-column @click.native="showLook(scope.row.res)" align="center" label="res响应数据" v-slot="scope">
+          <div @click="showLook(scope.row.res)">
+            <span>{{scope.row.res}}</span>
+            <el-button type="text">查看</el-button>
+          </div>
         </el-table-column>
-        <el-table-column align="center" label="ext其他数据" v-slot="scope">
-          {{scope.row.ext}}
+        <el-table-column @click.native="showLook(scope.row.ext)" align="center" label="ext其他数据" v-slot="scope">
+          <div @click="showLook(scope.row.ext)">
+            <span>{{scope.row.ext}}</span>
+            <el-button type="text">查看</el-button>
+          </div>
         </el-table-column>
         <el-table-column align="center" label="创建时间" v-slot="scope">
           {{new Date(scope.row.createdAt).toLocaleString()}}
@@ -50,6 +59,12 @@
         </el-pagination>
       </div>
     </el-card>
+    <el-dialog
+      title="查看"
+      :visible.sync="showLookDialog"
+      width="50%">
+      <tree-view :data="lookDialogData" :options="{maxDepth: 3}"></tree-view>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -58,18 +73,16 @@ import ApiLog from '@/api/log'
 export default {
   data () {
     return {
-      // page 当前是第几页
-      // limit 每页数据条数
-      // count 数据总条数
-      // pageCount 总共多少页
+      showLookDialog: false,
+      lookDialogData: {},
       search: {
         req: '',
         res: '',
         ext: '',
-        page: 1,
-        limit: 10,
-        count: 300,
-        pageCount: 30
+        page: 1, // 当前是第几页
+        limit: 10, // 每页数据条数
+        count: 300, // 数据总条数
+        pageCount: 30 // 总共多少页
       },
       tableData: []
     }
@@ -78,12 +91,22 @@ export default {
     this.getList()
   },
   methods: {
+    showLook (lookDialogData) {
+      this.showLookDialog = true
+      this.lookDialogData = lookDialogData
+    },
     create () {
-      ApiLog.postList({
+      const data = {
         req: { value: Math.random() },
         res: { value: Math.random() },
         ext: { value: Math.random() }
+      }
+      Array.apply(null, Array(5)).forEach(() => {
+        data.req[String(Math.random()).substring(2)] = Math.random()
+        data.res[String(Math.random()).substring(2)] = Math.random()
+        data.ext[String(Math.random()).substring(2)] = Math.random()
       })
+      ApiLog.postList(data)
     },
     async getList () {
       const result = await ApiLog.getList({ ...this.search })
