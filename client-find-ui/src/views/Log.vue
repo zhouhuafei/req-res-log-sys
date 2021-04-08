@@ -6,7 +6,7 @@
         <el-button type="primary" @click="create">写入日志</el-button>
       </div>
       <div class="ui-search-header-block dark">
-        <el-form inline>
+        <el-form inline label-width="100px">
           <el-form-item label="req请求数据">
             <el-input v-model="search.req"></el-input>
           </el-form-item>
